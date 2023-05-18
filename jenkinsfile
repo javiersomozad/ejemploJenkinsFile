@@ -3,6 +3,14 @@ pipeline {
     environment {
         SERVIDOR = 'localhost'
     }
+    
+    parameters {
+        string(name: 'NOMBRE', defaultValue: 'Ruben', description: 'Cual es tu nombre?')
+        text(name: 'APELLIDO', defaultValue: '', description: 'Y tu apellido?')
+        booleanParam(name: 'BOOLEANO', defaultValue: true, description: 'Ejemplo booleano')
+        choice(name: 'ELECCION', choices: ['Primero', 'Segundo', 'Tercero'], description: 'Elige')
+        password(name: 'PASSWORD', defaultValue: 'secreto', description: 'Indica la contraseña')
+    }
 
     stages {
         stage('Primera fase') {
@@ -30,6 +38,18 @@ pipeline {
                 echo 'Ejecutando tercera fase'
                 sh 'sleep 10'
                 sh 'echo Servidor : $SERVIDOR'
+            }
+        }
+
+        stage('Evaluacion de variables') {
+            steps {
+                echo 'Ejecutando evaluacion de variables'
+                sh 'sleep 10'
+                sh 'echo Servidor : ${SERVIDOR}'
+                sh "echo Nombre : ${params.NOMBRE}"
+                sh "echo Apellido : ${params.APELLIDO}"
+                sh "echo Selector : ${params.ELECCION}"
+                sh "echo Contraseña : ${params.PASSWORD}"
             }
         }
     }
