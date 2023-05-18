@@ -1,18 +1,27 @@
 pipeline {
     agent any
+    environment {
+        SERVIDOR = 'localhost'
+    }
 
     stages {
         stage('Primera fase') {
             steps {
                 echo 'Ejecutando primera fase'
                 sh 'sleep 10'
+                sh 'echo Servidor : $SERVIDOR'
             }
         }
-    
+
         stage('Segunda fase') {
+            environment {
+                SERVIDOR = '127.0.0.1'
+            }
+
             steps {
                 echo 'Ejecutando segunda fase'
                 sh 'sleep 10'
+                sh 'echo Servidor : $SERVIDOR'
             }
         }
 
@@ -20,6 +29,7 @@ pipeline {
             steps {
                 echo 'Ejecutando tercera fase'
                 sh 'sleep 10'
+                sh 'echo Servidor : $SERVIDOR'
             }
         }
     }
