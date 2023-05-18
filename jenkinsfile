@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Primera fase') {
+            steps {
+                echo 'Ejecutando primera fase'
+                sh 'sleep 10'
+            }
+        }
+    
+        stage('Segunda fase') {
+            steps {
+                echo 'Ejecutando segunda fase'
+                sh 'sleep 10'
+            }
+        }
+
+        stage('Tercera fase') {
+            steps {
+                echo 'Ejecutando tercera fase'
+                sh 'sleep 10'
+            }
+        }
+    }
+}
